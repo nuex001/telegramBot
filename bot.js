@@ -1,6 +1,8 @@
 const TelgramBot = require("node-telegram-bot-api");
 const axios = require("axios");
 require("dotenv").config();
+const express = require('express');
+const app = express();
 
 const token = process.env.Token;
 
@@ -77,4 +79,9 @@ bot.onText(/\/getaddress (.+)/, async (msg, match) => {
   bot.sendMessage(msg.chat.id, "Done!");
 });
 
-console.log("Bot running.....");
+const port = process.env.PORT || 3000; // Use the PORT environment variable if provided, otherwise default to 3000
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+

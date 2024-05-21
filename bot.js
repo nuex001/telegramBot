@@ -1,10 +1,11 @@
 const TelgramBot = require("node-telegram-bot-api");
 const axios = require("axios");
+const http = require("http");
 require("dotenv").config();
 
 const token = process.env.Token;
 const PORT = process.env.PORT || 5000;
-const bot = new TelgramBot(token, { polling: true , port: PORT});
+const bot = new TelgramBot(token, { polling: true });
 
 /**
  * @ERROR1
@@ -27,10 +28,11 @@ bot.onText(/\/start/, (msg) => {
  * Keep havin issues with this slashes, LOL
  * Let's batch the response, we check when it has reache the max 4096
  */
+
 bot.onText(/\/getaddress (.+)/, async (msg, match) => {
   const chatId = msg.chat.id; // I think this is for sending back message to the same exact chat
   const input = match[1].split(" "); //convert to array
-  // console.log(input);
+  console.log("input");
   if (input.length !== 2) {
     bot.sendMessage(
       chatId,
@@ -78,3 +80,10 @@ bot.onText(/\/getaddress (.+)/, async (msg, match) => {
 });
 
 console.log("Bot running.....");
+
+http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Bot is running...\n');
+}).listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});

@@ -16,7 +16,7 @@ const bot = new TelgramBot(token, { polling: true });
 bot.onText(/\/start/, (msg) => {
   bot.sendMessage(
     msg.chat.id,
-    "Welcome to MEMESLAND bot! Use te getaddress command followed by your base and address"
+    "Welcome to MEMESLAND bot! Use te getaddress command followed by your chain name and address"
   );
 });
 

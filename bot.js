@@ -3,8 +3,8 @@ const axios = require("axios");
 require("dotenv").config();
 
 const token = process.env.Token;
-
-const bot = new TelgramBot(token, { polling: true });
+const PORT = process.env.PORT || 5000;
+const bot = new TelgramBot(token, { polling: true , port: PORT});
 
 /**
  * @ERROR1
